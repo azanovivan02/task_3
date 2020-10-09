@@ -1,6 +1,6 @@
 <template>
-    <div id="add-tweet">
-        <h3>Add tweet</h3>
+    <div id="add-flit">
+        <h3>Add flit</h3>
     </div>
 </template>
 

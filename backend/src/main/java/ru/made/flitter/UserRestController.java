@@ -1,4 +1,4 @@
-package ru.made.twitter;
+package ru.made.flitter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.made.twitter.dto.AddUserForm;
-import ru.made.twitter.dto.User;
+import ru.made.flitter.dto.AddUserForm;
+import ru.made.flitter.dto.User;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -47,13 +47,5 @@ public class UserRestController {
                 .collect(Collectors.toList());
 
         return ResponseEntity.ok(userNames);
-    }
-
-    @DeleteMapping("/clear")
-    public ResponseEntity<String> clear() {
-        holder.getNameToUserMap().clear();
-        holder.getTokenToUserMap().clear();
-        holder.getNameToTweetsMap().clear();
-        return ResponseEntity.ok("Success");
     }
 }

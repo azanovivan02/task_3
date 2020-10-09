@@ -17,17 +17,11 @@ repositories {
 }
 
 dependencies {
-    runtimeOnly(project(":frontend"))
     implementation("org.springframework.boot:spring-boot-starter-actuator:2.1.3.RELEASE")
     implementation("org.springframework.boot:spring-boot-starter-web:2.1.3.RELEASE")
-    implementation("org.springframework.boot:spring-boot-starter-thymeleaf:2.1.3.RELEASE")
-    implementation("commons-io:commons-io:2.4")
-    implementation("io.jsonwebtoken:jjwt:0.9.0")
-    implementation("io.jsonwebtoken:jjwt-api:0.10.6")
-    implementation("com.mashape.unirest:unirest-java:1.4.9")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.9.8")
-    runtimeOnly("org.springframework.boot:spring-boot-devtools:2.1.3.RELEASE")
-    testImplementation("org.springframework.boot:spring-boot-starter-test") {
+    testImplementation("org.springframework.boot:spring-boot-starter-test:2.1.3.RELEASE") {
         exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
     }
+//    Uncomment this dependency in order to include frontend files to your app
+//    runtimeOnly(project(":frontend"))
 }

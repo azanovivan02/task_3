@@ -1,4 +1,4 @@
-package ru.made.twitter.dto;
+package ru.made.flitter.dto;
 
 public class User {
 

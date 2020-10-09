@@ -1,12 +1,12 @@
 <template>
-    <div id="view-tweets">
-        <h3>All tweets</h3>
+    <div id="view-flits">
+        <h3>All flits</h3>
         <ul id="demo">
-            <li v-for="tweet in tweets" v-bind:key="tweet">
+            <li v-for="flit in flits" v-bind:key="flit">
                 <div class="card blue-grey darken-1">
                     <div class="card-content white-text">
-                        <span class="card-title">{{tweet.userName}}</span>
-                        <p>{{tweet.content}}</p>
+                        <span class="card-title">{{flit.userName}}</span>
+                        <p>{{flit.content}}</p>
                     </div>
                 </div>
             </li>
@@ -19,17 +19,17 @@
     import axios from 'axios';
 
     export default {
-        name: 'ViewTweets',
+        name: 'ViewFlits',
         data() {
             return {
-                tweets: []
+                flits: []
             }
         },
         methods: {
             load() {
-                axios.get('/tweet/list')
+                axios.get('/flit/list')
                     .then(response => {
-                        this.$data.tweets = response.data;
+                        this.$data.flits = response.data;
                     })
                     .catch(error => {
                         console.log('ERROR: ' + error.response.data);

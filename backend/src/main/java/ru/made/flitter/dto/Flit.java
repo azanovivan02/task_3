@@ -1,14 +1,14 @@
-package ru.made.twitter.dto;
+package ru.made.flitter.dto;
 
-public class Tweet {
+public class Flit {
 
     private String userName;
     private String content;
 
-    public Tweet() {
+    public Flit() {
     }
 
-    public Tweet(String userName, String content) {
+    public Flit(String userName, String content) {
         this.userName = userName;
         this.content = content;
     }
@@ -31,7 +31,7 @@ public class Tweet {
 
     @Override
     public String toString() {
-        return "Tweet{" +
+        return "Flit{" +
                 "userName='" + userName + '\'' +
                 ", content='" + content + '\'' +
                 '}';

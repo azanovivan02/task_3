@@ -1,9 +1,9 @@
 <template>
     <div div="home">
         <b-jumbotron>
-        <template slot="header">Twitter</template>
+        <template slot="header">Flitter</template>
         <template slot="lead">
-          Twitter on java
+          Flitter on java
         </template>
         <hr class="my-4" />
 

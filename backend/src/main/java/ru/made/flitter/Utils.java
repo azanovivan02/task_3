@@ -1,4 +1,4 @@
-package ru.made.twitter;
+package ru.made.flitter;
 
 import java.util.UUID;
 

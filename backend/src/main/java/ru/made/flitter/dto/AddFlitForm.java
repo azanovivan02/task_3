@@ -1,14 +1,14 @@
-package ru.made.twitter.dto;
+package ru.made.flitter.dto;
 
-public class AddTweetForm {
+public class AddFlitForm {
 
     private String userToken;
     private String content;
 
-    public AddTweetForm() {
+    public AddFlitForm() {
     }
 
-    public AddTweetForm(String userToken, String content) {
+    public AddFlitForm(String userToken, String content) {
         this.userToken = userToken;
         this.content = content;
     }
@@ -31,7 +31,7 @@ public class AddTweetForm {
 
     @Override
     public String toString() {
-        return "AddTweetForm{" +
+        return "AddFlitForm{" +
                 "userToken='" + userToken + '\'' +
                 ", content='" + content + '\'' +
                 '}';

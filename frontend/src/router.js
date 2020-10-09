@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import ViewTweets from "./components/ViewTweets";
-import AddTweet from "./components/AddTweet";
+import ViewFlits from "./components/ViewFlits";
+import AddFlit from "./components/AddFlit";
 import Home from '@/components/Home'
 import ViewUsers from "./components/ViewUsers";
 
@@ -18,8 +18,8 @@ export default new Router({
       },
       {
         path: '/view',
-        name: 'ViewTweets',
-        component: ViewTweets
+        name: 'ViewFlits',
+        component: ViewFlits
       },
       {
         path: '/users',
@@ -28,8 +28,8 @@ export default new Router({
       },
       {
         path: '/add',
-        name: 'AddTweet',
-        component: AddTweet
+        name: 'AddFlit',
+        component: AddFlit
       }
     ]
 })
