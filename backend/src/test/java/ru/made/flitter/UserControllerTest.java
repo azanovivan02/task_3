@@ -118,6 +118,67 @@ public class UserControllerTest {
         assertSetEquals(expectedFlits, flits);
     }
 
+    @Test
+    public void addFlit_multipleUsers_multipleFlits() {
+        String tokenOne = addUser("Sasha");
+        addFlit(tokenOne, "Sasha's first flit");
+        addFlit(tokenOne, "Sasha's second flit");
+
+        String tokenTwo = addUser("Nikita");
+        addFlit(tokenTwo, "Nikita's first flit");
+        addFlit(tokenTwo, "Nikita's second flit");
+
+        List<Map<String, Object>> flits = listAllFlits();
+
+        List<Map<String, String>> expectedFlits = asList(
+                mapOf(USER_NAME, "Sasha", CONTENT, "Sasha's first flit"),
+                mapOf(USER_NAME, "Sasha", CONTENT, "Sasha's second flit"),
+                mapOf(USER_NAME, "Nikita", CONTENT, "Nikita's first flit"),
+                mapOf(USER_NAME, "Nikita", CONTENT, "Nikita's second flit")
+        );
+        assertSetEquals(expectedFlits, flits);
+    }
+
+    @Test
+    public void listFlitByUser_singleUser() {
+        String token = addUser("Sasha");
+        addFlit(token, "My first flit");
+        addFlit(token, "My second flit");
+
+        List<Map<String, Object>> flits = listFlitsByUser("Sasha");
+
+        List<Map<String, String>> expectedFlits = asList(
+                mapOf(USER_NAME, "Sasha", CONTENT, "My first flit"),
+                mapOf(USER_NAME, "Sasha", CONTENT, "My second flit")
+        );
+        assertSetEquals(expectedFlits, flits);
+    }
+
+    @Test
+    public void listFlitByUser_multipleUsers_multipleFlits() {
+        String tokenOne = addUser("Sasha");
+        addFlit(tokenOne, "Sasha's first flit");
+        addFlit(tokenOne, "Sasha's second flit");
+
+        String tokenTwo = addUser("Nikita");
+        addFlit(tokenTwo, "Nikita's first flit");
+        addFlit(tokenTwo, "Nikita's second flit");
+
+        List<Map<String, Object>> flitsBySasha = listFlitsByUser("Sasha");
+        List<Map<String, String>> expectedFlitsBySasha = asList(
+                mapOf(USER_NAME, "Sasha", CONTENT, "Sasha's first flit"),
+                mapOf(USER_NAME, "Sasha", CONTENT, "Sasha's second flit")
+        );
+        assertSetEquals(expectedFlitsBySasha, flitsBySasha);
+
+        List<Map<String, Object>> flitsByNikita = listFlitsByUser("Nikita");
+        List<Map<String, String>> expectedFlitsByNikita = asList(
+                mapOf(USER_NAME, "Nikita", CONTENT, "Nikita's first flit"),
+                mapOf(USER_NAME, "Nikita", CONTENT, "Nikita's second flit")
+        );
+        assertSetEquals(expectedFlitsByNikita, flitsByNikita);
+    }
+
     // === Util methods =====================================
 
     private void clear() {
@@ -160,6 +221,14 @@ public class UserControllerTest {
 
     private List<Map<String, Object>> listAllFlits() {
         String endpoint = LOCALHOST + port + "/flit/list";
+        List<Map<String, Object>> flits = castToMaps(
+                restTemplate.getForObject(endpoint, Object[].class)
+        );
+        return flits;
+    }
+
+    private List<Map<String, Object>> listFlitsByUser(String name) {
+        String endpoint = LOCALHOST + port + "/flit/list/" + name;
         List<Map<String, Object>> flits = castToMaps(
                 restTemplate.getForObject(endpoint, Object[].class)
         );
