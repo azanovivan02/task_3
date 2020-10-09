@@ -3,7 +3,7 @@ plugins {
     id("java")
 }
 
-group = "com.kotlin-spring-vue"
+group = "ru.made"
 version = "0.0.1-SNAPSHOT"
 
 java {
