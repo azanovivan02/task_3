@@ -5,8 +5,8 @@ plugins {
     kotlin("plugin.spring") version "1.3.50"
 }
 
-group = "com.kotlin-spring-vue"
-version = "0.0.1-SNAPSHOT"
+group = "ru.made"
+version = "flitter"
 java.sourceCompatibility = JavaVersion.VERSION_1_8
 
 repositories {
@@ -17,9 +17,9 @@ repositories {
 }
 
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-actuator:2.1.3.RELEASE")
-    implementation("org.springframework.boot:spring-boot-starter-web:2.1.3.RELEASE")
-    testImplementation("org.springframework.boot:spring-boot-starter-test:2.1.3.RELEASE") {
+    implementation("org.springframework.boot:spring-boot-starter-actuator:2.3.4.RELEASE")
+    implementation("org.springframework.boot:spring-boot-starter-web:2.3.4.RELEASE")
+    testImplementation("org.springframework.boot:spring-boot-starter-test:2.3.4.RELEASE") {
         exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
     }
 //    Uncomment this dependency in order to include frontend files to your app

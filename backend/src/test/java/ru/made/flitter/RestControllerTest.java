@@ -1,23 +1,21 @@
 package ru.made.flitter;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
 import static java.util.Arrays.asList;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static ru.made.flitter.utils.CollectionTestUtils.assertSetEquals;
 import static ru.made.flitter.utils.CollectionTestUtils.castToMap;
 import static ru.made.flitter.utils.CollectionTestUtils.castToMaps;
@@ -27,9 +25,8 @@ import static ru.made.flitter.utils.TestConstants.LOCALHOST;
 import static ru.made.flitter.utils.TestConstants.USER_NAME;
 import static ru.made.flitter.utils.TestConstants.USER_TOKEN;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-public class UserControllerTest {
+public class RestControllerTest {
 
     @Autowired
     private TestRestTemplate restTemplate;
@@ -37,8 +34,8 @@ public class UserControllerTest {
     @LocalServerPort
     private int port;
 
-    @Before
-    public void setUp() {
+    @BeforeEach
+    void setUp() {
         clear();
     }
 
@@ -179,7 +176,7 @@ public class UserControllerTest {
         assertSetEquals(expectedFlitsByNikita, flitsByNikita);
     }
 
-    // === Util methods =====================================
+    // === Util methods ====================================================================
 
     private void clear() {
         String endpoint = LOCALHOST + port + "clear";

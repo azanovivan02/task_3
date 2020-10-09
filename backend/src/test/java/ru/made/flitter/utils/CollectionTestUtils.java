@@ -7,11 +7,11 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CollectionTestUtils {
 
+    @SuppressWarnings("unchecked")
     public static Map<String, Object> castToMap(Object obj) {
         if (obj instanceof Map) {
             return (Map<String, Object>) obj;
@@ -29,13 +29,6 @@ public class CollectionTestUtils {
         }
 
         return outputList;
-    }
-
-    public static <T> T getSingleValue(Collection<T> collection) {
-        assertNotEquals("Collection expected to contain single value, but zero", 0, collection.size());
-        assertEquals("Collection expected to contain single value, but has more than one: ", 1, collection.size());
-
-        return collection.iterator().next();
     }
 
     public static <A, B> void assertSetEquals(Collection<A> collectionOne, Collection<B> collectionTwo) {
