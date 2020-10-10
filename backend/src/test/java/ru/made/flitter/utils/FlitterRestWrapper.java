@@ -44,20 +44,20 @@ public class FlitterRestWrapper {
 
     public List<String> listUsers() {
         var endpoint = LOCALHOST + port + "/user/list";
-        String[] users = restTemplate.getForObject(endpoint, String[].class);
+        var users = restTemplate.getForObject(endpoint, String[].class);
         return List.of(users);
     }
 
     public String addUser(String name) {
         var endpoint = LOCALHOST + port + "/user/add";
-        Map<String, Object> params = Map.of(USER_NAME, name);
+        var params = Map.of(USER_NAME, name);
 
-        Map<String, Object> response = castToMap(
+        var response = castToMap(
                 restTemplate.postForObject(endpoint, params, Object.class)
         );
 
-        Object outputName = response.get(USER_NAME);
-        Object outputToken = response.get(USER_TOKEN);
+        var outputName = response.get(USER_NAME);
+        var outputToken = response.get(USER_TOKEN);
         assertEquals(name, outputName);
         assertNotNull(outputToken);
 
@@ -74,7 +74,7 @@ public class FlitterRestWrapper {
 
     public void addFlit(String token, String content) {
         var endpoint = LOCALHOST + port + "/flit/add";
-        Map<String, Object> params = Map.of(
+        var params = Map.of(
                 USER_TOKEN, token,
                 CONTENT, content
         );
@@ -85,7 +85,7 @@ public class FlitterRestWrapper {
 
     public List<Map<String, Object>> listAllFlits() {
         var endpoint = LOCALHOST + port + "/flit/list";
-        List<Map<String, Object>> flits = castToMaps(
+        var flits = castToMaps(
                 restTemplate.getForObject(endpoint, Object[].class)
         );
         return flits;
@@ -93,7 +93,7 @@ public class FlitterRestWrapper {
 
     public List<Map<String, Object>> listFlitsByUser(String name) {
         var endpoint = LOCALHOST + port + "/flit/list/" + name;
-        List<Map<String, Object>> flits = castToMaps(
+        var flits = castToMaps(
                 restTemplate.getForObject(endpoint, Object[].class)
         );
         return flits;
@@ -113,7 +113,7 @@ public class FlitterRestWrapper {
 
     public void subscribe(String subscriberToken, String publisherName) {
         var endpoint = LOCALHOST + port + "/subscribe";
-        Map<String, Object> params = Map.of(
+        var params = Map.of(
                 SUBSCRIBER_TOKEN, subscriberToken,
                 PUBLISHER_NAME, publisherName
         );
@@ -130,7 +130,7 @@ public class FlitterRestWrapper {
 
     public void unsubscribe(String subscriberToken, String publisherName) {
         var endpoint = LOCALHOST + port + "/unsubscribe";
-        Map<String, Object> params = Map.of(
+        var params = Map.of(
                 SUBSCRIBER_TOKEN, subscriberToken,
                 PUBLISHER_NAME, publisherName
         );
@@ -147,7 +147,7 @@ public class FlitterRestWrapper {
 
     public List<Map<String, Object>> listFlitsConsumedByUser(String token) {
         var endpoint = LOCALHOST + port + "/flit/list/feed/" + token;
-        List<Map<String, Object>> flits = castToMaps(
+        var flits = castToMaps(
                 restTemplate.getForObject(endpoint, Object[].class)
         );
         return flits;
