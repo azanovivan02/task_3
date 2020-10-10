@@ -1,19 +1,18 @@
+group = "io.github.javaasasecondlanguage"
+version = "1.0-SNAPSHOT"
+
 plugins {
-    id("org.springframework.boot") version "2.1.3.RELEASE"
-    id("io.spring.dependency-management") version "1.0.8.RELEASE"
-    kotlin("jvm") version "1.3.50"
-    kotlin("plugin.spring") version "1.3.50"
+    java
+    id("org.springframework.boot") version "2.3.4.RELEASE"
 }
 
-group = "ru.made"
-version = "flitter"
-java.sourceCompatibility = JavaVersion.VERSION_1_8
+java {
+    sourceCompatibility = JavaVersion.VERSION_12
+    targetCompatibility = JavaVersion.VERSION_12
+}
 
 repositories {
     mavenCentral()
-    maven {
-        url = uri("https://plugins.gradle.org/m2/")
-    }
 }
 
 dependencies {

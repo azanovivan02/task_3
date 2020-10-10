@@ -18,7 +18,7 @@ public class StateHolder {
     private final ConcurrentMap<String, List<Flit>> nameToFlitsMap = new ConcurrentHashMap<>();
 
 //    {
-//        List<User> sampleUsers = Arrays.asList(
+//        List<User> sampleUsers = Arrays.List.of(
 //                new User("Sasha", "1111"),
 //                new User("Shamil", "2222")
 //        );

@@ -3,7 +3,6 @@ package ru.made.flitter.utils;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,9 +20,9 @@ public class CollectionTestUtils {
     }
 
     public static List<Map<String, Object>> castToMaps(Object[] arr) {
-        List<Map<String, Object>> outputList = new ArrayList<>();
+        var outputList = new ArrayList<Map<String, Object>>();
 
-        for (Object obj : arr) {
+        for (var obj : arr) {
             Map<String, Object> map = castToMap(obj);
             outputList.add(map);
         }
@@ -36,33 +35,5 @@ public class CollectionTestUtils {
                 new HashSet<>(collectionOne),
                 new HashSet<>(collectionTwo)
         );
-    }
-
-    public static <K, V> Map<K, V> mapOf(K k_1, V v_1) {
-        Map<K, V> map = new LinkedHashMap<>();
-        map.put(k_1, v_1);
-        return map;
-    }
-
-    public static <K, V> Map<K, V> mapOf(
-            K k_1, V v_1,
-            K k_2, V v_2
-    ) {
-        Map<K, V> map = new LinkedHashMap<>();
-        map.put(k_1, v_1);
-        map.put(k_2, v_2);
-        return map;
-    }
-
-    public static <K, V> Map<K, V> mapOf(
-            K k_1, V v_1,
-            K k_2, V v_2,
-            K k_3, V v_3
-    ) {
-        Map<K, V> map = new LinkedHashMap<>();
-        map.put(k_1, v_1);
-        map.put(k_2, v_2);
-        map.put(k_3, v_3);
-        return map;
     }
 }

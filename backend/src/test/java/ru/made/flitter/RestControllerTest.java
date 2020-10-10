@@ -8,18 +8,15 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import static java.util.Arrays.asList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static ru.made.flitter.utils.CollectionTestUtils.assertSetEquals;
 import static ru.made.flitter.utils.CollectionTestUtils.castToMap;
 import static ru.made.flitter.utils.CollectionTestUtils.castToMaps;
-import static ru.made.flitter.utils.CollectionTestUtils.mapOf;
 import static ru.made.flitter.utils.TestConstants.CONTENT;
 import static ru.made.flitter.utils.TestConstants.LOCALHOST;
 import static ru.made.flitter.utils.TestConstants.USER_NAME;
@@ -41,7 +38,7 @@ public class RestControllerTest {
 
     @Test
     public void listUsers_empty() {
-        List<String> users = listUsers();
+        var users = listUsers();
         assertEquals(0, users.size());
     }
 
@@ -53,125 +50,125 @@ public class RestControllerTest {
     @Test
     public void addUser_singleUser() {
         addUser("Sasha");
-        List<String> users = listUsers();
+        var users = listUsers();
         assertEquals(
-                asList("Sasha"),
+                List.of("Sasha"),
                 users
         );
     }
 
     @Test
     public void addUser_multipleUsers() {
-        List<String> inputUsers = asList("Sasha", "Nikita");
+        var inputUsers = List.of("Sasha", "Nikita");
 
-        for (String user : inputUsers) {
+        for (var user : inputUsers) {
             addUser(user);
         }
 
-        List<String> listedUsers = listUsers();
+        var listedUsers = listUsers();
         assertSetEquals(inputUsers, listedUsers);
     }
 
     @Test
     public void listAllFlits_empty() {
-        List<Map<String, Object>> flits = listAllFlits();
+        var flits = listAllFlits();
         assertEquals(0, flits.size());
     }
 
     @Test
     public void addFlit_noCheck() {
-        String token = addUser("Sasha");
-        String content = "My first flit";
+        var token = addUser("Sasha");
+        var content = "My first flit";
 
         addFlit(token, content);
     }
 
     @Test
     public void addFlit_singleUser_singleFlit() {
-        String token = addUser("Sasha");
-        String inputContent = "My first flit";
+        var token = addUser("Sasha");
+        var inputContent = "My first flit";
 
         addFlit(token, inputContent);
-        List<Map<String, Object>> flits = listAllFlits();
+        var flits = listAllFlits();
 
-        List<Map<String, String>> expectedFlits = asList(
-                mapOf(USER_NAME, "Sasha", CONTENT, "My first flit")
+        var expectedFlits = List.of(
+                Map.of(USER_NAME, "Sasha", CONTENT, "My first flit")
         );
         assertSetEquals(expectedFlits, flits);
     }
 
     @Test
     public void addFlit_singleUser_multipleFlits() {
-        String token = addUser("Sasha");
+        var token = addUser("Sasha");
         addFlit(token, "My first flit");
         addFlit(token, "My second flit");
 
-        List<Map<String, Object>> flits = listAllFlits();
+        var flits = listAllFlits();
 
-        List<Map<String, String>> expectedFlits = asList(
-                mapOf(USER_NAME, "Sasha", CONTENT, "My first flit"),
-                mapOf(USER_NAME, "Sasha", CONTENT, "My second flit")
+        var expectedFlits = List.of(
+                Map.of(USER_NAME, "Sasha", CONTENT, "My first flit"),
+                Map.of(USER_NAME, "Sasha", CONTENT, "My second flit")
         );
         assertSetEquals(expectedFlits, flits);
     }
 
     @Test
     public void addFlit_multipleUsers_multipleFlits() {
-        String tokenOne = addUser("Sasha");
+        var tokenOne = addUser("Sasha");
         addFlit(tokenOne, "Sasha's first flit");
         addFlit(tokenOne, "Sasha's second flit");
 
-        String tokenTwo = addUser("Nikita");
+        var tokenTwo = addUser("Nikita");
         addFlit(tokenTwo, "Nikita's first flit");
         addFlit(tokenTwo, "Nikita's second flit");
 
-        List<Map<String, Object>> flits = listAllFlits();
+        var flits = listAllFlits();
 
-        List<Map<String, String>> expectedFlits = asList(
-                mapOf(USER_NAME, "Sasha", CONTENT, "Sasha's first flit"),
-                mapOf(USER_NAME, "Sasha", CONTENT, "Sasha's second flit"),
-                mapOf(USER_NAME, "Nikita", CONTENT, "Nikita's first flit"),
-                mapOf(USER_NAME, "Nikita", CONTENT, "Nikita's second flit")
+        var expectedFlits = List.of(
+                Map.of(USER_NAME, "Sasha", CONTENT, "Sasha's first flit"),
+                Map.of(USER_NAME, "Sasha", CONTENT, "Sasha's second flit"),
+                Map.of(USER_NAME, "Nikita", CONTENT, "Nikita's first flit"),
+                Map.of(USER_NAME, "Nikita", CONTENT, "Nikita's second flit")
         );
         assertSetEquals(expectedFlits, flits);
     }
 
     @Test
     public void listFlitByUser_singleUser() {
-        String token = addUser("Sasha");
+        var token = addUser("Sasha");
         addFlit(token, "My first flit");
         addFlit(token, "My second flit");
 
-        List<Map<String, Object>> flits = listFlitsByUser("Sasha");
+        var flits = listFlitsByUser("Sasha");
 
-        List<Map<String, String>> expectedFlits = asList(
-                mapOf(USER_NAME, "Sasha", CONTENT, "My first flit"),
-                mapOf(USER_NAME, "Sasha", CONTENT, "My second flit")
+        var expectedFlits = List.of(
+                Map.of(USER_NAME, "Sasha", CONTENT, "My first flit"),
+                Map.of(USER_NAME, "Sasha", CONTENT, "My second flit")
         );
         assertSetEquals(expectedFlits, flits);
     }
 
     @Test
     public void listFlitByUser_multipleUsers_multipleFlits() {
-        String tokenOne = addUser("Sasha");
+        var tokenOne = addUser("Sasha");
         addFlit(tokenOne, "Sasha's first flit");
         addFlit(tokenOne, "Sasha's second flit");
 
-        String tokenTwo = addUser("Nikita");
+        var tokenTwo = addUser("Nikita");
         addFlit(tokenTwo, "Nikita's first flit");
         addFlit(tokenTwo, "Nikita's second flit");
 
-        List<Map<String, Object>> flitsBySasha = listFlitsByUser("Sasha");
-        List<Map<String, String>> expectedFlitsBySasha = asList(
-                mapOf(USER_NAME, "Sasha", CONTENT, "Sasha's first flit"),
-                mapOf(USER_NAME, "Sasha", CONTENT, "Sasha's second flit")
+        var flitsBySasha = listFlitsByUser("Sasha");
+        List<Map<String, String>> expectedFlitsBySasha = List.of(
+                Map.of(USER_NAME, "Sasha", CONTENT, "Sasha's first flit"),
+                Map.of(USER_NAME, "Sasha", CONTENT, "Sasha's second flit")
         );
         assertSetEquals(expectedFlitsBySasha, flitsBySasha);
 
-        List<Map<String, Object>> flitsByNikita = listFlitsByUser("Nikita");
-        List<Map<String, String>> expectedFlitsByNikita = asList(
-                mapOf(USER_NAME, "Nikita", CONTENT, "Nikita's first flit"),
-                mapOf(USER_NAME, "Nikita", CONTENT, "Nikita's second flit")
+        var flitsByNikita = listFlitsByUser("Nikita");
+        var expectedFlitsByNikita = List.of(
+                Map.of(USER_NAME, "Nikita", CONTENT, "Nikita's first flit"),
+                Map.of(USER_NAME, "Nikita", CONTENT, "Nikita's second flit")
         );
         assertSetEquals(expectedFlitsByNikita, flitsByNikita);
     }
@@ -179,19 +176,19 @@ public class RestControllerTest {
     // === Util methods ====================================================================
 
     private void clear() {
-        String endpoint = LOCALHOST + port + "clear";
+        var endpoint = LOCALHOST + port + "clear";
         restTemplate.delete(endpoint);
     }
 
     private List<String> listUsers() {
-        String endpoint = LOCALHOST + port + "/user/list";
+        var endpoint = LOCALHOST + port + "/user/list";
         String[] users = restTemplate.getForObject(endpoint, String[].class);
-        return Arrays.asList(users);
+        return List.of(users);
     }
 
     private String addUser(String name) {
-        String endpoint = LOCALHOST + port + "/user/add";
-        Map<String, Object> params = mapOf(USER_NAME, name);
+        var endpoint = LOCALHOST + port + "/user/add";
+        Map<String, Object> params = Map.of(USER_NAME, name);
 
         Map<String, Object> response = castToMap(
                 restTemplate.postForObject(endpoint, params, Object.class)
@@ -206,8 +203,8 @@ public class RestControllerTest {
     }
 
     private void addFlit(String token, String content) {
-        String endpoint = LOCALHOST + port + "/flit/add";
-        Map<String, Object> params = mapOf(
+        var endpoint = LOCALHOST + port + "/flit/add";
+        Map<String, Object> params = Map.of(
                 USER_TOKEN, token,
                 CONTENT, content
         );
@@ -217,7 +214,7 @@ public class RestControllerTest {
     }
 
     private List<Map<String, Object>> listAllFlits() {
-        String endpoint = LOCALHOST + port + "/flit/list";
+        var endpoint = LOCALHOST + port + "/flit/list";
         List<Map<String, Object>> flits = castToMaps(
                 restTemplate.getForObject(endpoint, Object[].class)
         );
@@ -225,7 +222,7 @@ public class RestControllerTest {
     }
 
     private List<Map<String, Object>> listFlitsByUser(String name) {
-        String endpoint = LOCALHOST + port + "/flit/list/" + name;
+        var endpoint = LOCALHOST + port + "/flit/list/" + name;
         List<Map<String, Object>> flits = castToMaps(
                 restTemplate.getForObject(endpoint, Object[].class)
         );
