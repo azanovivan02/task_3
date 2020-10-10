@@ -13,21 +13,21 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CollectionTestUtils {
 
-    public static <A, B> void assertSetEquals(Collection<A> collectionOne, Collection<B> collectionTwo) {
+    public static <A, B> void assertSetEquals(Collection<A> expectedCollection, Collection<B> actualCollection) {
         assertEquals(
-                new HashSet<>(collectionOne),
-                new HashSet<>(collectionTwo)
+                new HashSet<>(expectedCollection),
+                new HashSet<>(actualCollection)
         );
     }
 
     public static <A, B> void assertMapsEqualByKeys(
-            Collection<Map<String, A>> collectionOne,
-            Collection<Map<String, B>> collectionTwo,
+            Collection<Map<String, A>> expectedCollection,
+            Collection<Map<String, B>> actualCollection,
             String... keys
     ) {
         assertEquals(
-                retainKeys(collectionOne, keys),
-                retainKeys(collectionTwo, keys)
+                retainKeys(expectedCollection, keys),
+                retainKeys(actualCollection, keys)
         );
     }
 

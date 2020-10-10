@@ -55,8 +55,6 @@ public class FlitRestController {
 				.flatMap(Collection::stream)
 				.collect(Collectors.toList());
 
-		System.out.println("Invoked list all flits: "+allFlits.size());
-
 		return ResponseEntity.ok(allFlits);
 	}
 

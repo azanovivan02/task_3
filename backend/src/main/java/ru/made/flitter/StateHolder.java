@@ -4,9 +4,8 @@ import org.springframework.stereotype.Component;
 import ru.made.flitter.dto.Flit;
 import ru.made.flitter.dto.User;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -15,28 +14,11 @@ public class StateHolder {
 
     private final ConcurrentMap<String, User> tokenToUserMap = new ConcurrentHashMap<>();
     private final ConcurrentMap<String, User> nameToUserMap = new ConcurrentHashMap<>();
+
     private final ConcurrentMap<String, List<Flit>> nameToFlitsMap = new ConcurrentHashMap<>();
 
-//    {
-//        List<User> sampleUsers = Arrays.List.of(
-//                new User("Sasha", "1111"),
-//                new User("Shamil", "2222")
-//        );
-//
-//        for (User user : sampleUsers) {
-//            tokenToUserMap.put(user.getUserToken(), user);
-//            nameToUserMap.put(user.getUserName(), user);
-//
-//            List<Flit> flits = nameToFlitsMap.computeIfAbsent(user.getUserName(), e -> new ArrayList<>());
-//
-//            for (int i = 0; i < 5; i++) {
-//                String flitContent = user.getUserName()+" flit "+i;
-//                Flit flit = new Flit(user.getUserName(), flitContent);
-//                flits.add(flit);
-//            }
-//        }
-//
-//    }
+    private final ConcurrentMap<String, Set<String>> subscriberNameToPublishersMap = new ConcurrentHashMap<>();
+    private final ConcurrentMap<String, Set<String>> publisherNameToSubscribersMap = new ConcurrentHashMap<>();
 
     public ConcurrentMap<String, User> getTokenToUserMap() {
         return tokenToUserMap;
@@ -48,5 +30,13 @@ public class StateHolder {
 
     public ConcurrentMap<String, List<Flit>> getNameToFlitsMap() {
         return nameToFlitsMap;
+    }
+
+    public ConcurrentMap<String, Set<String>> getSubscriberNameToPublishersMap() {
+        return subscriberNameToPublishersMap;
+    }
+
+    public ConcurrentMap<String, Set<String>> getPublisherNameToSubscribersMap() {
+        return publisherNameToSubscribersMap;
     }
 }

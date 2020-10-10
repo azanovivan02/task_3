@@ -16,6 +16,8 @@ public class ClearController {
         holder.getNameToUserMap().clear();
         holder.getTokenToUserMap().clear();
         holder.getNameToFlitsMap().clear();
+        holder.getPublisherNameToSubscribersMap().clear();
+        holder.getSubscriberNameToPublishersMap().clear();
         return ResponseEntity.ok("Success");
     }
 }
