@@ -7,8 +7,8 @@ plugins {
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_12
-    targetCompatibility = JavaVersion.VERSION_12
+    sourceCompatibility = JavaVersion.VERSION_14
+    targetCompatibility = JavaVersion.VERSION_14
 }
 
 repositories {
@@ -23,4 +23,8 @@ dependencies {
     }
 //    Uncomment this dependency in order to include frontend files to your app
 //    runtimeOnly(project(":frontend"))
+}
+
+tasks.test {
+    useJUnitPlatform()
 }
