@@ -49,7 +49,7 @@ public class FlitterRestWrapper {
     }
 
     public String addUser(String name) {
-        var endpoint = LOCALHOST + port + "/user/add";
+        var endpoint = LOCALHOST + port + "/user/register";
         var params = Map.of(USER_NAME, name);
 
         var response = castToMap(

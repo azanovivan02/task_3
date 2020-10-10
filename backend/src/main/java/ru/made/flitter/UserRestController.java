@@ -20,7 +20,7 @@ public class UserRestController {
     @Autowired
     StateHolder holder;
 
-    @PostMapping("/add")
+    @PostMapping("/register")
     public ResponseEntity<User> add(@RequestBody AddUserForm form) {
         String userName = form.getUserName();
         if (holder.getNameToUserMap().containsKey(userName)) {
