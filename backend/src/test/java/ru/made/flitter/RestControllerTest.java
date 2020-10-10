@@ -14,6 +14,7 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static ru.made.flitter.utils.CollectionTestUtils.assertMapsEqualByKeys;
 import static ru.made.flitter.utils.CollectionTestUtils.assertSetEquals;
 import static ru.made.flitter.utils.CollectionTestUtils.castToMap;
 import static ru.made.flitter.utils.CollectionTestUtils.castToMaps;
@@ -94,7 +95,7 @@ public class RestControllerTest {
         var expectedFlits = List.of(
                 Map.of(USER_NAME, "Sasha", CONTENT, "My first flit")
         );
-        assertSetEquals(expectedFlits, flits);
+        assertMapsEqualByKeys(expectedFlits, flits, USER_NAME, CONTENT);
     }
 
     @Test
@@ -109,7 +110,7 @@ public class RestControllerTest {
                 Map.of(USER_NAME, "Sasha", CONTENT, "My first flit"),
                 Map.of(USER_NAME, "Sasha", CONTENT, "My second flit")
         );
-        assertSetEquals(expectedFlits, flits);
+        assertMapsEqualByKeys(expectedFlits, flits, USER_NAME, CONTENT);
     }
 
     @Test
@@ -130,7 +131,7 @@ public class RestControllerTest {
                 Map.of(USER_NAME, "Nikita", CONTENT, "Nikita's first flit"),
                 Map.of(USER_NAME, "Nikita", CONTENT, "Nikita's second flit")
         );
-        assertSetEquals(expectedFlits, flits);
+        assertMapsEqualByKeys(expectedFlits, flits, USER_NAME, CONTENT);
     }
 
     @Test
@@ -145,7 +146,7 @@ public class RestControllerTest {
                 Map.of(USER_NAME, "Sasha", CONTENT, "My first flit"),
                 Map.of(USER_NAME, "Sasha", CONTENT, "My second flit")
         );
-        assertSetEquals(expectedFlits, flits);
+        assertMapsEqualByKeys(expectedFlits, flits, USER_NAME, CONTENT);
     }
 
     @Test
@@ -163,14 +164,14 @@ public class RestControllerTest {
                 Map.of(USER_NAME, "Sasha", CONTENT, "Sasha's first flit"),
                 Map.of(USER_NAME, "Sasha", CONTENT, "Sasha's second flit")
         );
-        assertSetEquals(expectedFlitsBySasha, flitsBySasha);
+        assertMapsEqualByKeys(expectedFlitsBySasha, flitsBySasha, USER_NAME, CONTENT);
 
         var flitsByNikita = listFlitsByUser("Nikita");
         var expectedFlitsByNikita = List.of(
                 Map.of(USER_NAME, "Nikita", CONTENT, "Nikita's first flit"),
                 Map.of(USER_NAME, "Nikita", CONTENT, "Nikita's second flit")
         );
-        assertSetEquals(expectedFlitsByNikita, flitsByNikita);
+        assertMapsEqualByKeys(expectedFlitsByNikita, flitsByNikita, USER_NAME, CONTENT);
     }
 
     // === Util methods ====================================================================
